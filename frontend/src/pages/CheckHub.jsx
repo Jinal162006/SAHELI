@@ -1,34 +1,38 @@
-import { Image, Link2, MessagesSquare, UserSearch } from 'lucide-react';
+import { ArrowRight, Image, Link2, MessagesSquare, UserSearch } from 'lucide-react';
 import { Link } from 'react-router';
-import { Card, PageHeader } from '../components/ui';
+import { ClayCard, PageHeader } from '../components/ui';
 import { useDocumentTitle } from '../lib/hooks';
+import { useI18n } from '../lib/i18n';
 
-const checks = [
-  ['/check/conversation', MessagesSquare, 'Conversation', 'Find pressure, secrecy and scam signals in a chat.'],
-  ['/check/image', Image, 'Image', 'Review an image for privacy and safety risks.'],
-  ['/check/link', Link2, 'Suspicious link', 'Check where a link may lead before opening it.'],
-  ['/check/profile', UserSearch, 'Profile', 'Think through identity and impersonation signals.'],
+const CHECKS = [
+  { to: '/check/conversation', icon: MessagesSquare, variant: 'lavender', title: 'Conversation', body: 'Check a conversation for scam signals.' },
+  { to: '/check/image', icon: Image, variant: 'pink', title: 'Image', body: 'Review an image for safety risks.' },
+  { to: '/check/link', icon: Link2, variant: 'blue', title: 'Suspicious link', body: 'Check a link before you open it.' },
+  { to: '/check/profile', icon: UserSearch, variant: 'lavender', title: 'Profile', body: 'Look for identity and impersonation risks.' },
 ];
 
 export default function CheckHub() {
-  useDocumentTitle('Safety checks');
+  const { t } = useI18n();
+  useDocumentTitle(t('nav.check'));
   return (
-    <div className="space-y-7">
-      <PageHeader eyebrow="Check safely" title="What would you like to check?" description="Choose one focused check. SAHELI explains the signals in plain language and helps you decide what to do next." />
+    <div className="space-y-6">
+      <PageHeader title="Safety checks" description="Choose the kind of content you want SAHELI to review." />
       <div className="grid gap-4 sm:grid-cols-2">
-        {checks.map(([to, Icon, title, body]) => (
-          <Link key={to} to={to} className="clay-card group block p-5 transition-transform hover:-translate-y-0.5">
-            <span className="clay-icon bg-brand-50 text-brand-700"><Icon className="size-6" /></span>
-            <h2 className="mt-5 text-lg font-semibold">{title}</h2>
-            <p className="mt-1 text-ink-soft">{body}</p>
-            <span className="mt-5 inline-flex rounded-lg bg-brand-50 px-3 py-1.5 text-sm font-semibold text-brand-700">Open check</span>
+        {CHECKS.map(({ to, icon: Icon, variant, title, body }) => (
+          <Link key={to} to={to} className="group">
+            <ClayCard variant={variant} className="flex h-full items-center gap-4 p-5 transition-transform hover:-translate-y-0.5">
+              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-700">
+                <Icon className="size-6" aria-hidden />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-lg font-semibold">{title}</span>
+                <span className="mt-1 block text-sm text-ink-soft">{body}</span>
+              </span>
+              <ArrowRight className="size-5 text-muted transition-transform group-hover:translate-x-1" aria-hidden />
+            </ClayCard>
           </Link>
         ))}
       </div>
-      <Card className="clay-card bg-info-50/70 p-5">
-        <p className="font-semibold text-info-700">A gentle reminder</p>
-        <p className="mt-1 text-sm text-ink-soft">You can pause, take a screenshot, and ask someone you trust before responding.</p>
-      </Card>
     </div>
   );
 }

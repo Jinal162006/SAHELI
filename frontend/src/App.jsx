@@ -13,6 +13,7 @@ const SignUp = lazy(() => import('./pages/auth/SignUp'));
 const ForgotPassword = lazy(() => import('./pages/auth/ForgotPassword'));
 const ResetPassword = lazy(() => import('./pages/auth/ResetPassword'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
+const More = lazy(() => import('./pages/More'));
 const Safety = lazy(() => import('./pages/Safety'));
 const CheckHub = lazy(() => import('./pages/CheckHub'));
 const CheckConversation = lazy(() => import('./pages/check/CheckConversation'));
@@ -100,6 +101,7 @@ const router = createBrowserRouter([
   {
     element: <AdaptiveLayout />,
     children: [
+      { path: '/check', element: p(<CheckHub />) },
       { path: '/check/conversation', element: p(<CheckConversation />) },
       { path: '/check/link', element: p(<CheckLink />) },
       { path: '/check/profile', element: p(<CheckProfile />) },
@@ -115,8 +117,8 @@ const router = createBrowserRouter([
     element: <RequireAuth />,
     children: [
       { path: '/home', element: p(<Dashboard />) },
+      { path: '/more', element: p(<More />) },
       { path: '/safety', element: p(<Safety />) },
-      { path: '/check', element: p(<CheckHub />) },
       { path: '/check/image', element: p(<CheckImage />) },
       { path: '/companion', element: p(<Companion />) },
       { path: '/vault', element: p(<Vault />) },

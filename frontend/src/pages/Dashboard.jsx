@@ -1,15 +1,10 @@
 import {
   ArrowRight,
   CircleCheck,
-  FileText,
-  FolderLock,
   Image,
-  Link2,
-  MapPinned,
   MessageCircleHeart,
   MessagesSquare,
   Siren,
-  UserSearch,
   Users,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -25,13 +20,13 @@ export const LINK_TONES = { safe: 'safe', unable_to_verify: 'neutral', suspiciou
 
 function QuickAction({ to, icon: Icon, title, body, tone = 'brand' }) {
   const tones = {
-    brand: 'bg-brand-50 text-brand-700',
-    info: 'bg-info-50 text-info-700',
-    rose: 'bg-rose-50 text-rose-600',
+    brand: 'clay-brand text-brand-700',
+    info: 'clay-blue text-blue-600',
+    rose: 'clay-rose text-rose-600',
     danger: 'bg-danger-50 text-danger-700',
   };
   return (
-    <Link to={to} className="card group flex items-start gap-4 p-4 transition-shadow hover:shadow-[var(--shadow-lift)] sm:p-5">
+    <Link to={to} className="card clay-card group flex items-start gap-4 p-4 transition-shadow hover:shadow-[var(--shadow-lift)] sm:p-5">
       <span className={cx('grid size-11 shrink-0 place-items-center rounded-xl', tones[tone])}>
         <Icon className="size-5" aria-hidden />
       </span>
@@ -128,19 +123,20 @@ export default function Dashboard() {
         <div className="grid gap-3 sm:grid-cols-2">
           <QuickAction to="/check/conversation" icon={MessagesSquare} title={t('dashboard.quick_conversation')} body={t('dashboard.quick_conversation_body')} />
           <QuickAction to="/companion" icon={MessageCircleHeart} tone="rose" title={t('dashboard.quick_companion')} body={t('dashboard.quick_companion_body')} />
-          <QuickAction to="/check/link" icon={Link2} tone="info" title={t('dashboard.quick_link')} body={t('dashboard.quick_link_body')} />
           <QuickAction to="/check/image" icon={Image} tone="info" title={t('dashboard.quick_image')} body={t('dashboard.quick_image_body')} />
-          <QuickAction to="/check/profile" icon={UserSearch} tone="info" title={t('dashboard.quick_profile')} body={t('dashboard.quick_profile_body')} />
           <QuickAction to="/sos" icon={Siren} tone="danger" title={t('dashboard.quick_sos')} body={t('dashboard.quick_sos_body')} />
         </div>
+        <Link to="/check" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
+          {t('nav.check')} <ArrowRight className="size-4" aria-hidden />
+        </Link>
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr]">
+      <div className="grid gap-4 lg:grid-cols-2">
         <section aria-labelledby="setup">
           <h2 id="setup" className="mb-3 text-lg font-semibold">
             {t('dashboard.status_title')}
           </h2>
-          <Card className="divide-y divide-line">
+          <Card className="clay-mint divide-y divide-line overflow-hidden">
             <Link to="/contacts" className="flex items-center gap-3 p-4 hover:bg-lavender-50">
               <Users className={cx('size-5', contactCount ? 'text-safe-600' : 'text-caution-600')} aria-hidden />
               <span className="flex-1">
@@ -151,19 +147,9 @@ export default function Dashboard() {
               </span>
               <ArrowRight className="size-4 text-muted" aria-hidden />
             </Link>
-            <Link to="/vault" className="flex items-center gap-3 p-4 hover:bg-lavender-50">
-              <FolderLock className="size-5 text-brand-600" aria-hidden />
-              <span className="flex-1 font-medium">{t('nav.vault')}</span>
-              <ArrowRight className="size-4 text-muted" aria-hidden />
-            </Link>
-            <Link to="/reports" className="flex items-center gap-3 p-4 hover:bg-lavender-50">
-              <FileText className="size-5 text-brand-600" aria-hidden />
-              <span className="flex-1 font-medium">{t('nav.reports')}</span>
-              <ArrowRight className="size-4 text-muted" aria-hidden />
-            </Link>
-            <Link to="/meeting" className="flex items-center gap-3 p-4 hover:bg-lavender-50">
-              <MapPinned className="size-5 text-brand-600" aria-hidden />
-              <span className="flex-1 font-medium">{t('nav.meeting')}</span>
+            <Link to="/safety" className="flex items-center gap-3 p-4 hover:bg-lavender-50">
+              <CircleCheck className="size-5 text-safe-600" aria-hidden />
+              <span className="flex-1 font-medium">{t('nav.safety')}</span>
               <ArrowRight className="size-4 text-muted" aria-hidden />
             </Link>
           </Card>
@@ -173,7 +159,7 @@ export default function Dashboard() {
           <h2 id="activity" className="mb-3 text-lg font-semibold">
             {t('dashboard.activity_title')}
           </h2>
-          <Card className="p-2">
+          <Card className="clay-blue p-2">
             {checks.loading ? (
               <p className="p-4 text-sm text-muted">{t('common.loading')}</p>
             ) : checks.data && !checks.data.enabled ? (

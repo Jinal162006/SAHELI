@@ -146,7 +146,9 @@ export default function Landing() {
               <span className="size-1.5 rounded-full bg-rose-500" aria-hidden />
               {t('brand.tagline')}
             </p>
-            <h1 className="font-display text-[2.4rem] font-semibold leading-[1.08] text-ink sm:text-[3.4rem]">{t('landing.hero_title')}</h1>
+            <h1 className="font-display text-[2.4rem] font-semibold leading-[1.08] text-ink sm:text-[3.4rem]">
+              SAHELI {'\u2014'} Always by Your Side.
+            </h1>
             <p className="mt-5 max-w-xl text-lg text-ink-soft">{t('landing.hero_body')}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <LinkButton to="/check/conversation" size="lg" icon={MessagesSquare}>

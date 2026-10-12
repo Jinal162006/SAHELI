@@ -4,22 +4,17 @@ import {
   FileText,
   FolderLock,
   House,
-  ShieldCheck,
-  Image,
   LifeBuoy,
-  Link2,
   LogOut,
   MapPinned,
   MessageCircleHeart,
-  MessagesSquare,
   Settings,
-  Siren,
-  UserSearch,
   Users,
   UsersRound,
   Watch,
-  X,
   LayoutGrid,
+  ShieldCheck,
+  Siren,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router';
@@ -30,46 +25,28 @@ import { useI18n } from '../../lib/i18n';
 import { timeAgo } from '../../lib/format';
 import { LanguagePicker } from '../LanguagePicker';
 import { Logo } from '../Logo';
-import { Button, cx } from '../ui';
+import { cx } from '../ui';
 import { OfflineBanner } from './OfflineBanner';
 
 export const NAV_GROUPS = [
-  { items: [{ to: '/home', icon: House, label: 'nav.home' }, { to: '/safety', icon: ShieldCheck, label: 'nav.safety' }] },
-  {
-    title: 'nav.check',
-    items: [
-      { to: '/check', icon: LayoutGrid, label: 'nav.check_hub' },
-      { to: '/check/conversation', icon: MessagesSquare, label: 'nav.check_conversation' },
-      { to: '/check/link', icon: Link2, label: 'nav.check_link' },
-      { to: '/check/image', icon: Image, label: 'nav.check_image' },
-      { to: '/check/profile', icon: UserSearch, label: 'nav.check_profile' },
-    ],
-  },
   { items: [
+    { to: '/home', icon: House, label: 'nav.home' },
+    { to: '/safety', icon: ShieldCheck, label: 'nav.safety' },
+    { to: '/check', icon: LayoutGrid, label: 'nav.check' },
     { to: '/companion', icon: MessageCircleHeart, label: 'nav.companion' },
-    { to: '/evidence', icon: FolderLock, label: 'nav.evidence' },
+    { to: '/evidence', icon: FolderLock, label: 'nav.vault' },
     { to: '/contacts', icon: Users, label: 'nav.contacts' },
     { to: '/sos', icon: Siren, label: 'nav.sos' },
     { to: '/settings', icon: Settings, label: 'nav.settings' },
   ] },
   {
-    title: 'nav.protect',
+    title: 'nav.more',
     items: [
-      { to: '/vault', icon: FolderLock, label: 'nav.vault' },
       { to: '/reports', icon: FileText, label: 'nav.reports' },
       { to: '/meeting', icon: MapPinned, label: 'nav.meeting' },
-    ],
-  },
-  {
-    title: 'nav.family',
-    items: [
       { to: '/family', icon: UsersRound, label: 'nav.family_links' },
       { to: '/checkin', icon: CircleCheck, label: 'nav.checkin' },
       { to: '/devices', icon: Watch, label: 'nav.devices' },
-    ],
-  },
-  {
-    items: [
       { to: '/help', icon: LifeBuoy, label: 'nav.help' },
     ],
   },
@@ -77,9 +54,12 @@ export const NAV_GROUPS = [
 
 const MOBILE_TABS = [
   { to: '/home', icon: House, label: 'nav.home' },
+  { to: '/safety', icon: ShieldCheck, label: 'nav.safety' },
   { to: '/check', icon: LayoutGrid, label: 'nav.check' },
   { to: '/companion', icon: MessageCircleHeart, label: 'nav.companion' },
-  { to: '/vault', icon: FolderLock, label: 'nav.vault_short' },
+  { to: '/evidence', icon: FolderLock, label: 'nav.vault_short' },
+  { to: '/contacts', icon: Users, label: 'nav.contacts' },
+  { to: '/more', icon: LayoutGrid, label: 'nav.more' },
 ];
 
 function SosLink({ className }) {
@@ -88,7 +68,7 @@ function SosLink({ className }) {
     <Link
       to="/sos"
       className={cx(
-        'inline-flex items-center justify-center rounded-xl bg-danger-600 px-3.5 font-bold tracking-wide text-white shadow-sm hover:bg-danger-700',
+        'inline-flex items-center justify-center rounded-xl border border-[#f2aabd] bg-pastel-pink px-3.5 font-bold tracking-wide text-danger-700 shadow-sm hover:bg-pastel-yellow',
         className,
       )}
     >
@@ -172,6 +152,16 @@ function NotificationsButton() {
 
 function SideNav({ onNavigate }) {
   const { t } = useI18n();
+  const navColors = {
+    '/home': 'nav-lilac',
+    '/safety': 'nav-mint',
+    '/check': 'nav-blue',
+    '/companion': 'nav-pink',
+    '/evidence': 'nav-lavender',
+    '/contacts': 'nav-mint',
+    '/sos': 'nav-pink',
+    '/settings': 'nav-blue',
+  };
   return (
     <nav aria-label={t('nav.main')} className="space-y-5">
       {NAV_GROUPS.map((group, index) => (
@@ -186,7 +176,7 @@ function SideNav({ onNavigate }) {
                   className={({ isActive }) =>
                     cx(
                       'flex items-center gap-3 rounded-xl px-3 py-2 text-[0.95rem] font-medium transition-colors',
-                      isActive ? 'bg-brand-50 text-brand-800' : 'text-ink-soft hover:bg-lavender-100 hover:text-ink',
+                      isActive ? `${navColors[to] ?? 'nav-lavender'} text-ink` : 'text-ink-soft hover:bg-pastel-blue/40 hover:text-ink',
                     )
                   }
                 >
@@ -202,45 +192,18 @@ function SideNav({ onNavigate }) {
   );
 }
 
-function MoreSheet({ open, onClose }) {
-  const { t } = useI18n();
-  const { signOut } = useAuth();
-  if (!open) return null;
-  return (
-    <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label={t('nav.more')}>
-      <button type="button" className="absolute inset-0 bg-ink/40" onClick={onClose} aria-label={t('common.close')} />
-      <div className="absolute inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-3xl bg-surface p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
-        <div className="mb-4 flex items-center justify-between">
-          <Logo to="/home" />
-          <button type="button" onClick={onClose} className="rounded-lg p-2 text-muted hover:bg-lavender-100" aria-label={t('common.close')}>
-            <X className="size-5" aria-hidden />
-          </button>
-        </div>
-        <SideNav onNavigate={onClose} />
-        <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
-          <LanguagePicker />
-          <Button variant="ghost" size="sm" icon={LogOut} onClick={() => signOut()}>
-            {t('nav.sign_out')}
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function AppShell() {
   const { t } = useI18n();
   const { signOut, profile } = useAuth();
-  const [moreOpen, setMoreOpen] = useState(false);
   const location = useLocation();
+  const atmosphere = location.pathname.startsWith('/check') ? 'check' : location.pathname.startsWith('/companion') ? 'companion' : location.pathname.startsWith('/evidence') || location.pathname.startsWith('/vault') ? 'evidence' : location.pathname.startsWith('/contacts') ? 'contacts' : location.pathname.startsWith('/settings') ? 'settings' : location.pathname.startsWith('/sos') ? 'sos' : location.pathname.startsWith('/safety') ? 'safety' : location.pathname.startsWith('/more') ? 'lavender' : 'home';
 
   useEffect(() => {
-    setMoreOpen(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
-    <div className="min-h-dvh lg:grid lg:grid-cols-[17rem_1fr]">
+    <div className="h-dvh overflow-hidden lg:grid lg:grid-cols-[17rem_1fr]">
       <a href="#main" className="skip-link">
         {t('nav.skip_to_content')}
       </a>
@@ -263,8 +226,8 @@ export function AppShell() {
         </div>
       </aside>
 
-      <div className="flex min-w-0 flex-col">
-        <header className="sticky top-0 z-30 border-b border-line/70 bg-canvas/90 backdrop-blur">
+      <div className="flex min-h-0 min-w-0 flex-col">
+        <header className="relative z-30 shrink-0 border-b border-line/70 bg-canvas/90 backdrop-blur">
           <div className="flex h-16 items-center justify-between gap-2 px-4 sm:px-6">
             <Logo to="/home" className="lg:hidden" />
             <div className="hidden lg:block" />
@@ -279,7 +242,7 @@ export function AppShell() {
           <OfflineBanner />
         </header>
 
-        <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-6 sm:px-6 sm:pt-8 lg:pb-12">
+        <main id="main" className={`page-atmosphere page-atmosphere-${atmosphere} min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-28 pt-6 sm:px-6 sm:pt-8 lg:pb-12`}>
           <Outlet />
         </main>
       </div>
@@ -288,29 +251,22 @@ export function AppShell() {
         aria-label={t('nav.main')}
         className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
       >
-        <ul className="grid grid-cols-5">
+        <ul className="grid grid-cols-7">
           {MOBILE_TABS.map(({ to, icon: Icon, label }) => (
             <li key={to}>
               <NavLink
                 to={to}
                 className={({ isActive }) =>
-                  cx('flex flex-col items-center gap-0.5 py-2.5 text-[0.72rem] font-semibold', isActive ? 'text-brand-700' : 'text-muted')
+                  cx('flex min-w-0 flex-col items-center gap-0.5 py-2.5 text-[0.62rem] font-semibold sm:text-[0.72rem]', isActive ? 'text-brand-700' : 'text-muted')
                 }
               >
-                <Icon className="size-5" aria-hidden />
+                <Icon className="size-[1.1rem]" aria-hidden />
                 {t(label)}
               </NavLink>
             </li>
           ))}
-          <li>
-            <button type="button" onClick={() => setMoreOpen(true)} className="flex w-full flex-col items-center gap-0.5 py-2.5 text-[0.72rem] font-semibold text-muted">
-              <LayoutGrid className="size-5" aria-hidden />
-              {t('nav.more')}
-            </button>
-          </li>
         </ul>
       </nav>
-      <MoreSheet open={moreOpen} onClose={() => setMoreOpen(false)} />
     </div>
   );
 }

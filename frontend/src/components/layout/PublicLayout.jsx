@@ -72,7 +72,7 @@ export function PublicLayout({ contained = false }) {
       </a>
       <PublicHeader />
       <OfflineBanner />
-      <main id="main" className={contained ? 'mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6 sm:pt-10' : 'flex-1'}>
+      <main id="main" className={contained ? 'page-atmosphere page-atmosphere-check mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6 sm:pt-10' : 'flex-1'}>
         <Outlet />
       </main>
       <PublicFooter />

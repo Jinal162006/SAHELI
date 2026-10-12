@@ -20,10 +20,10 @@ export { cx };
 // Buttons -----------------------------------------------------------------------------------
 
 const BUTTON_VARIANTS = {
-  primary: 'bg-brand-600 text-white hover:bg-brand-700 shadow-sm disabled:bg-brand-300',
-  secondary: 'bg-surface text-ink border border-line-strong hover:border-brand-300 hover:bg-lavender-50 disabled:text-muted',
-  soft: 'bg-brand-50 text-brand-700 hover:bg-brand-100 disabled:text-brand-300',
-  ghost: 'text-ink-soft hover:bg-lavender-100 hover:text-ink disabled:text-muted',
+  primary: 'bg-pastel-lavender text-ink hover:bg-pastel-lilac shadow-sm disabled:opacity-60',
+  secondary: 'bg-pastel-blue text-ink border border-pastel-blue-strong hover:bg-pastel-lavender disabled:text-muted',
+  soft: 'bg-pastel-lilac text-ink hover:bg-pastel-pink disabled:opacity-60',
+  ghost: 'text-ink-soft hover:bg-pastel-blue hover:text-ink disabled:text-muted',
   danger: 'bg-danger-600 text-white hover:bg-danger-700 shadow-sm disabled:bg-danger-100',
   'danger-soft': 'bg-danger-50 text-danger-700 border border-danger-100 hover:bg-danger-100',
   safe: 'bg-safe-600 text-white hover:bg-safe-700 shadow-sm',
@@ -90,6 +90,14 @@ export function LinkButton({ to, href, variant = 'primary', size = 'md', icon: I
 export function Card({ as: Tag = 'div', className, children, ...props }) {
   return (
     <Tag className={cx('card', className)} {...props}>
+      {children}
+    </Tag>
+  );
+}
+
+export function ClayCard({ variant = 'lavender', as: Tag = 'div', className, children, ...props }) {
+  return (
+    <Tag className={cx('card clay-card', `clay-${variant}`, className)} {...props}>
       {children}
     </Tag>
   );

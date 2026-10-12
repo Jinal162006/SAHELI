@@ -4,7 +4,7 @@
 const en = {
   brand: {
     name: 'SAHELI',
-    tagline: 'Your digital safety companion',
+    tagline: 'Always by Your Side',
   },
 
   common: {
@@ -70,13 +70,11 @@ const en = {
     home: 'Home',
     safety: 'Safety',
     check: 'Check',
-    check_hub: 'All checks',
     check_conversation: 'Conversation',
     check_link: 'Link',
     check_image: 'Image',
     check_profile: 'Profile',
     companion: 'Companion',
-    evidence: 'Evidence',
     protect: 'Protect',
     vault: 'Evidence Vault',
     vault_short: 'Vault',
@@ -120,9 +118,8 @@ const en = {
 
   landing: {
     meta_title: 'Your digital safety companion',
-    hero_title: "Something feels wrong? Let's look at it together.",
-    hero_body:
-      'SAHELI checks conversations, links and photos for the warning signs that come before scams, blackmail and grooming. It explains what it finds in plain words, and helps you decide what to do next.',
+    hero_title: 'SAHELI Always by Your Side.',
+    hero_body: 'Your Safety. Your Voice. Your Companion.',
     hero_cta: 'Check a conversation',
     hero_cta_note: 'No account needed. Nothing you paste is saved.',
     hero_secondary: 'Create a free account',
