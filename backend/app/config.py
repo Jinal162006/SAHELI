@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     # Public origin of the site, used in emails and status links. No trailing slash.
     public_url: str = Field(default="http://localhost:5173", alias="SAHELI_PUBLIC_URL")
+    cors_origins: str = Field(default="http://localhost:5173,http://localhost,https://localhost", alias="SAHELI_CORS_ORIGINS")
 
     database_url: str = Field(alias="DATABASE_URL")
 
@@ -63,6 +64,10 @@ class Settings(BaseSettings):
     @property
     def is_production(self) -> bool:
         return self.environment == "production"
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
 
     @property
     def ai_enabled(self) -> bool:

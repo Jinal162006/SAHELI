@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:capacitor": "vite build --mode capacitor",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint .",
-    "cap:sync": "npm run build && cap sync android",
+    "cap:sync": "npm run build:capacitor && cap sync android",
     "cap:open:android": "cap open android"
   },
   "dependencies": {

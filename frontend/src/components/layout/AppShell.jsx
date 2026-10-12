@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   Bell,
   CircleCheck,
   FileText,
@@ -55,12 +56,13 @@ export const NAV_GROUPS = [
 const MOBILE_TABS = [
   { to: '/home', icon: House, label: 'nav.home' },
   { to: '/safety', icon: ShieldCheck, label: 'nav.safety' },
-  { to: '/check', icon: LayoutGrid, label: 'nav.check' },
-  { to: '/companion', icon: MessageCircleHeart, label: 'nav.companion' },
-  { to: '/evidence', icon: FolderLock, label: 'nav.vault_short' },
   { to: '/contacts', icon: Users, label: 'nav.contacts' },
+  { to: '/evidence', icon: FolderLock, label: 'nav.vault_short' },
+  { to: '/settings', icon: Settings, label: 'nav.settings' },
   { to: '/more', icon: LayoutGrid, label: 'nav.more' },
 ];
+
+const MOBILE_ROOTS = new Set(MOBILE_TABS.map(({ to }) => to));
 
 function SosLink({ className }) {
   const { t } = useI18n();
@@ -196,6 +198,8 @@ export function AppShell() {
   const { t } = useI18n();
   const { signOut, profile } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+  const showBack = !MOBILE_ROOTS.has(location.pathname) && location.pathname !== '/sos';
   const atmosphere = location.pathname.startsWith('/check') ? 'check' : location.pathname.startsWith('/companion') ? 'companion' : location.pathname.startsWith('/evidence') || location.pathname.startsWith('/vault') ? 'evidence' : location.pathname.startsWith('/contacts') ? 'contacts' : location.pathname.startsWith('/settings') ? 'settings' : location.pathname.startsWith('/sos') ? 'sos' : location.pathname.startsWith('/safety') ? 'safety' : location.pathname.startsWith('/more') ? 'lavender' : 'home';
 
   useEffect(() => {
@@ -229,7 +233,19 @@ export function AppShell() {
       <div className="flex min-h-0 min-w-0 flex-col">
         <header className="relative z-30 shrink-0 border-b border-line/70 bg-canvas/90 backdrop-blur">
           <div className="flex h-16 items-center justify-between gap-2 px-4 sm:px-6">
-            <Logo to="/home" className="lg:hidden" />
+            <div className="flex min-w-0 items-center gap-1 lg:hidden">
+              {showBack ? (
+                <button
+                  type="button"
+                  onClick={() => (location.key === 'default' ? navigate('/home') : navigate(-1))}
+                  className="grid size-10 shrink-0 place-items-center rounded-xl text-ink-soft hover:bg-lavender-100 hover:text-ink"
+                  aria-label={t('common.back')}
+                >
+                  <ArrowLeft className="size-5" aria-hidden />
+                </button>
+              ) : null}
+              <Logo to="/home" />
+            </div>
             <div className="hidden lg:block" />
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="hidden md:block">
@@ -251,7 +267,7 @@ export function AppShell() {
         aria-label={t('nav.main')}
         className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
       >
-        <ul className="grid grid-cols-7">
+        <ul className="grid grid-cols-6">
           {MOBILE_TABS.map(({ to, icon: Icon, label }) => (
             <li key={to}>
               <NavLink

@@ -17,8 +17,12 @@ android {
         }
     }
     buildTypes {
+        debug {
+            manifestPlaceholders = [allowCleartext: "true"]
+        }
         release {
             minifyEnabled false
+            manifestPlaceholders = [allowCleartext: "false"]
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

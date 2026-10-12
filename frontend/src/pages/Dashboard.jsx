@@ -1,7 +1,11 @@
 import {
   ArrowRight,
   CircleCheck,
+  FileText,
+  FolderLock,
   Image,
+  LifeBuoy,
+  MapPinned,
   MessageCircleHeart,
   MessagesSquare,
   Siren,
@@ -126,9 +130,14 @@ export default function Dashboard() {
           <QuickAction to="/check/image" icon={Image} tone="info" title={t('dashboard.quick_image')} body={t('dashboard.quick_image_body')} />
           <QuickAction to="/sos" icon={Siren} tone="danger" title={t('dashboard.quick_sos')} body={t('dashboard.quick_sos_body')} />
         </div>
-        <Link to="/check" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
-          {t('nav.check')} <ArrowRight className="size-4" aria-hidden />
-        </Link>
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <QuickAction to="/check" icon={CircleCheck} title="Safety tools" body="Run a check" />
+          <QuickAction to="/evidence" icon={FolderLock} title="Evidence vault" body="Keep items private" tone="info" />
+          <QuickAction to="/contacts" icon={Users} title="Trusted contacts" body="Manage your support" tone="rose" />
+          <QuickAction to="/meeting" icon={MapPinned} title="Safe meeting" body="Plan check-ins" />
+          <QuickAction to="/reports" icon={FileText} title="Incident report" body="Record what happened" />
+          <QuickAction to="/help" icon={LifeBuoy} title="Safety guides" body="Find practical help" tone="info" />
+        </div>
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">

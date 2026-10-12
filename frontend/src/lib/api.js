@@ -1,5 +1,7 @@
 import { clearInvalidSession, getAccessToken } from './supabase';
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
 export class ApiError extends Error {
   constructor(status, code, message, fields = null) {
     super(message);
@@ -35,7 +37,13 @@ export async function api(path, { method = 'GET', body, form, signal, anonymous 
 
   let response;
   try {
-    response = await fetch(path, { method, headers, body: payload, signal, credentials: 'same-origin' });
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method,
+      headers,
+      body: payload,
+      signal,
+      credentials: API_BASE_URL ? 'include' : 'same-origin',
+    });
   } catch (error) {
     if (error?.name === 'AbortError') throw error;
     throw new ApiError(0, 'network', 'network');

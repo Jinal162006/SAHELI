@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: saheli-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /api/health
+    envVars:
+      - key: SAHELI_ENV
+        value: production
+      - key: SAHELI_PUBLIC_URL
+        value: https://saheli-alpha.vercel.app
+      - key: SAHELI_CORS_ORIGINS
+        value: https://saheli-alpha.vercel.app,https://localhost,capacitor://localhost
+      - key: SAHELI_STORAGE_BACKEND
+        value: supabase
+      - key: SAHELI_STORAGE_BUCKET
+        value: evidence
+      - key: SAHELI_RUN_JOBS
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SAHELI_ENCRYPTION_KEY
+        sync: false
+      - key: SAHELI_HASH_SECRET
+        sync: false
+      - key: SAHELI_OPERATOR_NAME
+        sync: false
+      - key: SAHELI_SUPPORT_EMAIL
+        sync: false
+      - key: SAHELI_GOVERNING_LAW
+        sync: false

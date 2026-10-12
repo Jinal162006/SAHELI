@@ -38,7 +38,11 @@ export function AuthProvider({ children }) {
       let supabase;
       try {
         supabase = await getSupabase();
-      } catch {
+      } catch (error) {
+        console.error('[SAHELI] Supabase authentication initialization failed.', {
+          code: error?.code || 'supabase_init_failed',
+          message: error?.message || 'unknown',
+        });
         if (!cancelled) setStatus('unavailable');
         return;
       }
