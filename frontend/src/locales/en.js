@@ -68,12 +68,15 @@ const en = {
 
   nav: {
     home: 'Home',
+    safety: 'Safety',
     check: 'Check',
+    check_hub: 'All checks',
     check_conversation: 'Conversation',
     check_link: 'Link',
     check_image: 'Image',
     check_profile: 'Profile',
     companion: 'Companion',
+    evidence: 'Evidence',
     protect: 'Protect',
     vault: 'Evidence Vault',
     vault_short: 'Vault',

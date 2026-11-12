@@ -41,8 +41,11 @@ const hiLatn = {
 
   nav: {
     home: 'Home',
+    safety: 'Suraksha',
     check: 'Check',
+    check_hub: 'Sabhi checks',
     companion: 'Saathi',
+    evidence: 'Evidence',
     vault: 'Evidence Vault',
     vault_short: 'Vault',
     contacts: 'Bharosemand log',

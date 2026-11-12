@@ -4,6 +4,7 @@ import {
   FileText,
   FolderLock,
   House,
+  ShieldCheck,
   Image,
   LifeBuoy,
   Link2,
@@ -12,6 +13,7 @@ import {
   MessageCircleHeart,
   MessagesSquare,
   Settings,
+  Siren,
   UserSearch,
   Users,
   UsersRound,
@@ -32,23 +34,29 @@ import { Button, cx } from '../ui';
 import { OfflineBanner } from './OfflineBanner';
 
 export const NAV_GROUPS = [
-  { items: [{ to: '/home', icon: House, label: 'nav.home' }] },
+  { items: [{ to: '/home', icon: House, label: 'nav.home' }, { to: '/safety', icon: ShieldCheck, label: 'nav.safety' }] },
   {
     title: 'nav.check',
     items: [
+      { to: '/check', icon: LayoutGrid, label: 'nav.check_hub' },
       { to: '/check/conversation', icon: MessagesSquare, label: 'nav.check_conversation' },
       { to: '/check/link', icon: Link2, label: 'nav.check_link' },
       { to: '/check/image', icon: Image, label: 'nav.check_image' },
       { to: '/check/profile', icon: UserSearch, label: 'nav.check_profile' },
     ],
   },
-  { items: [{ to: '/companion', icon: MessageCircleHeart, label: 'nav.companion' }] },
+  { items: [
+    { to: '/companion', icon: MessageCircleHeart, label: 'nav.companion' },
+    { to: '/evidence', icon: FolderLock, label: 'nav.evidence' },
+    { to: '/contacts', icon: Users, label: 'nav.contacts' },
+    { to: '/sos', icon: Siren, label: 'nav.sos' },
+    { to: '/settings', icon: Settings, label: 'nav.settings' },
+  ] },
   {
     title: 'nav.protect',
     items: [
       { to: '/vault', icon: FolderLock, label: 'nav.vault' },
       { to: '/reports', icon: FileText, label: 'nav.reports' },
-      { to: '/contacts', icon: Users, label: 'nav.contacts' },
       { to: '/meeting', icon: MapPinned, label: 'nav.meeting' },
     ],
   },
@@ -63,14 +71,13 @@ export const NAV_GROUPS = [
   {
     items: [
       { to: '/help', icon: LifeBuoy, label: 'nav.help' },
-      { to: '/settings', icon: Settings, label: 'nav.settings' },
     ],
   },
 ];
 
 const MOBILE_TABS = [
   { to: '/home', icon: House, label: 'nav.home' },
-  { to: '/check/conversation', icon: MessagesSquare, label: 'nav.check' },
+  { to: '/check', icon: LayoutGrid, label: 'nav.check' },
   { to: '/companion', icon: MessageCircleHeart, label: 'nav.companion' },
   { to: '/vault', icon: FolderLock, label: 'nav.vault_short' },
 ];

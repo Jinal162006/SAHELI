@@ -13,6 +13,8 @@ const SignUp = lazy(() => import('./pages/auth/SignUp'));
 const ForgotPassword = lazy(() => import('./pages/auth/ForgotPassword'));
 const ResetPassword = lazy(() => import('./pages/auth/ResetPassword'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Safety = lazy(() => import('./pages/Safety'));
+const CheckHub = lazy(() => import('./pages/CheckHub'));
 const CheckConversation = lazy(() => import('./pages/check/CheckConversation'));
 const CheckLink = lazy(() => import('./pages/check/CheckLink'));
 const CheckImage = lazy(() => import('./pages/check/CheckImage'));
@@ -113,9 +115,12 @@ const router = createBrowserRouter([
     element: <RequireAuth />,
     children: [
       { path: '/home', element: p(<Dashboard />) },
+      { path: '/safety', element: p(<Safety />) },
+      { path: '/check', element: p(<CheckHub />) },
       { path: '/check/image', element: p(<CheckImage />) },
       { path: '/companion', element: p(<Companion />) },
       { path: '/vault', element: p(<Vault />) },
+      { path: '/evidence', element: p(<Vault />) },
       { path: '/vault/:id', element: p(<VaultItem />) },
       { path: '/reports', element: p(<Reports />) },
       { path: '/reports/new', element: p(<ReportEditor />) },

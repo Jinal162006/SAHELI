@@ -62,6 +62,7 @@
   --radius-card: 1.125rem;
   --shadow-card: 0 1px 2px rgb(30 26 46 / 0.04), 0 6px 24px -12px rgb(30 26 46 / 0.08);
   --shadow-lift: 0 2px 4px rgb(30 26 46 / 0.05), 0 16px 40px -16px rgb(67 32 138 / 0.18);
+  --shadow-clay: 9px 9px 22px rgb(56 43 94 / 0.10), -8px -8px 20px rgb(255 255 255 / 0.88), inset 1px 1px 0 rgb(255 255 255 / 0.75);
 }
 
 @layer base {
@@ -71,7 +72,7 @@
   }
 
   body {
-    background: var(--color-canvas);
+    background: #f7f5fa;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -124,6 +125,22 @@
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
+  }
+
+  .clay-card {
+    background: #f8f7fc;
+    border: 1px solid rgb(255 255 255 / 0.8);
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-clay);
+  }
+
+  .clay-icon {
+    display: inline-grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border-radius: 0.9rem;
+    box-shadow: inset 1px 1px 2px rgb(255 255 255 / 0.9), 3px 3px 8px rgb(56 43 94 / 0.08);
   }
 
   .prose-calm p + p {
