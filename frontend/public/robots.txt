@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /$
+Allow: /help
+Allow: /privacy
+Allow: /terms
+Allow: /contact
+Disallow: /s/
+Disallow: /watch
+Disallow: /api/

@@ -1,0 +1,26 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+backend/.storage/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Local dev data
+dev/.pgdata/
+dev/.auth-users.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+dev/.test-accounts*

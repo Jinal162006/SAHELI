@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+
+/*
+  SAHELI design tokens.
+  Violet is the brand; red appears only for real danger. Every risk colour is paired with
+  an icon and a word, so nothing depends on colour alone.
+*/
+@theme {
+  --font-sans: 'Figtree Variable', 'Noto Sans Devanagari Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', 'Noto Sans Devanagari Variable', ui-serif, Georgia, serif;
+
+  --color-canvas: #f8f7fc;
+  --color-surface: #ffffff;
+  --color-ink: #1e1a2e;
+  --color-ink-soft: #46405a;
+  --color-muted: #6b6581;
+  --color-line: #e8e4f1;
+  --color-line-strong: #d7d1e5;
+
+  --color-lavender-50: #f6f3fd;
+  --color-lavender-100: #eee9fb;
+  --color-lavender-200: #ddd3f7;
+
+  --color-brand-50: #f5f1ff;
+  --color-brand-100: #ece4ff;
+  --color-brand-200: #d9c9fe;
+  --color-brand-300: #bda2fc;
+  --color-brand-500: #7c3aed;
+  --color-brand-600: #6a2bd9;
+  --color-brand-700: #5622b3;
+  --color-brand-800: #43208a;
+
+  --color-rose-50: #fdf2f8;
+  --color-rose-500: #ec4899;
+  --color-rose-600: #c81e6f;
+
+  --color-info-50: #ecfbfe;
+  --color-info-600: #0b7f98;
+  --color-info-700: #0a6577;
+
+  --color-safe-50: #eefbf3;
+  --color-safe-100: #d6f5e2;
+  --color-safe-600: #16803c;
+  --color-safe-700: #136c34;
+
+  --color-caution-50: #fff8eb;
+  --color-caution-100: #feedc7;
+  --color-caution-600: #b45309;
+  --color-caution-700: #92400e;
+
+  --color-high-50: #fff3ec;
+  --color-high-100: #fee1cf;
+  --color-high-600: #c2410c;
+  --color-high-700: #9a3412;
+
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-danger-700: #b91c1c;
+
+  --radius-card: 1.125rem;
+  --shadow-card: 0 1px 2px rgb(30 26 46 / 0.04), 0 6px 24px -12px rgb(30 26 46 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(30 26 46 / 0.05), 0 16px 40px -16px rgb(67 32 138 / 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  .font-display {
+    font-variation-settings: 'SOFT' 60, 'WONK' 0;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-brand-200);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .prose-calm p + p {
+    margin-top: 0.75rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--color-ink);
+    color: white;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+}
+
+@keyframes sos-ring {
+  from {
+    stroke-dashoffset: var(--ring-length);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.recording-dot {
+  animation: soft-pulse 1.6s ease-in-out infinite;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .card {
+    box-shadow: none;
+    border-color: #ccc;
+  }
+}
