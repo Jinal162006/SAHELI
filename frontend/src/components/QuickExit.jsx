@@ -13,6 +13,10 @@ export function quickExit() {
   }
   // replace() keeps SAHELI out of the back button history for this tab.
   window.location.replace(SAFE_PAGE);
+  // Some embedded browsers ignore replace() while a page is still active.
+  window.setTimeout(() => {
+    if (window.location.href !== SAFE_PAGE) window.location.assign(SAFE_PAGE);
+  }, 100);
 }
 
 /** Leaves the site immediately. Also bound to pressing Escape three times quickly. */
