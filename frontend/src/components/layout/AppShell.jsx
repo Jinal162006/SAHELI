@@ -28,7 +28,6 @@ import { useI18n } from '../../lib/i18n';
 import { timeAgo } from '../../lib/format';
 import { LanguagePicker } from '../LanguagePicker';
 import { Logo } from '../Logo';
-import { QuickExit } from '../QuickExit';
 import { Button, cx } from '../ui';
 import { OfflineBanner } from './OfflineBanner';
 
@@ -266,7 +265,6 @@ export function AppShell() {
               <span className="hidden md:block">
                 <LanguagePicker compact />
               </span>
-              <QuickExit compact />
               <NotificationsButton />
               <SosLink className="h-10 lg:hidden" />
             </div>

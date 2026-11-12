@@ -4,7 +4,6 @@ import { useAuth } from '../../lib/auth';
 import { useT } from '../../lib/i18n';
 import { LanguagePicker } from '../LanguagePicker';
 import { Logo } from '../Logo';
-import { QuickExit } from '../QuickExit';
 import { LinkButton } from '../ui';
 import { OfflineBanner } from './OfflineBanner';
 
@@ -22,7 +21,6 @@ export function PublicHeader() {
           <span className="hidden sm:block">
             <LanguagePicker />
           </span>
-          <QuickExit compact />
           {status === 'signed_in' ? (
             <LinkButton to="/home" size="sm" className="whitespace-nowrap">
               {t('nav.home')}

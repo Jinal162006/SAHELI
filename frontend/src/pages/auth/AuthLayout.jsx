@@ -1,7 +1,6 @@
 import { Phone } from 'lucide-react';
 import { Link } from 'react-router';
 import { Logo } from '../../components/Logo';
-import { QuickExit } from '../../components/QuickExit';
 import { LanguagePicker } from '../../components/LanguagePicker';
 import { useDocumentTitle } from '../../lib/hooks';
 import { useT } from '../../lib/i18n';
@@ -15,7 +14,6 @@ export function AuthLayout({ title, description, children, footer }) {
         <Logo />
         <div className="flex items-center gap-2">
           <LanguagePicker compact />
-          <QuickExit compact />
         </div>
       </header>
       <main id="main" className="flex flex-1 items-start justify-center px-4 pb-16 pt-6 sm:pt-12">
